@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var gui = require('nw.gui');
+
+        // Open a new window.
+        var win = gui.Window.open('popup.html');
+
+        // Release the 'win' object here after the new window is closed.
+        win.on('closed', function() {
+            win = null;
+        });
+
+        // Listen to main window's close event
+        gui.Window.get().on('close', function() {
+            // Hide the window to give user the feeling of closing immediately
+            this.hide();
+
+            // If the new window is still open then close it.
+            if (win != null)
+                win.close(true);
+
+            // After closing the new window, close the main window.
+            this.close(true);
+        });
+    </script>
+    <title>codebare</title>
+</head>
+<body>
+<h1>codebare</h1>
+
+<p></p>
+</body>
+</html>
